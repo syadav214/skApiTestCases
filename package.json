@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./test.sh",
-    "unit": "./node_modules/mocha/bin/mocha test/6.CancelOrder.test.js"
+    "unit": "./node_modules/mocha/bin/mocha test/4.TakeOrder.test.js"
   },
   "repository": {
     "type": "git",

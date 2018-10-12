@@ -18,7 +18,7 @@ describe('Fetch Order Tests', () => {
 
   it('Should get status code 404 for passing incorrect OrderID', done => {
     api
-      .get('/v1/orders/-1')
+      .get('/v1/orders/0')
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(404);

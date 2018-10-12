@@ -19,7 +19,7 @@ describe('Complete Order Tests', () => {
 
   it('Should get status code 404 for passing incorrect OrderID', done => {
     api
-      .put('/v1/orders/-1/complete')
+      .put('/v1/orders/0/complete')
       .send(null)
       .expect('Content-Type', /json/)
       .end((err, res) => {
