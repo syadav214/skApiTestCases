@@ -4,7 +4,8 @@
   "description": "Test cases for API testing",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha tests/6.CancelOrder.js"
+    "test": "./test.sh",
+    "unit": "./node_modules/mocha/bin/mocha test/6.CancelOrder.test.js"
   },
   "repository": {
     "type": "git",

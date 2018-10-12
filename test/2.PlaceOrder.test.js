@@ -62,14 +62,14 @@ const validInput = {
   ]
 };
 
-describe('skApiTestCases - Place Order Tests', function() {
-  it('No Input', function(done) {
+describe('Place Order Tests', () => {
+  it('Should get status code 400 for null payload', done => {
     api
       .post('/v1/orders')
       .set('Accept', 'application/json')
       .send(null)
       .expect('Content-Type', /json/)
-      .end(function(err, res) {
+      .end((err, res) => {
         chai.expect(res.statusCode).to.equal(400);
         chai.expect(res.body).to.have.property('message');
         chai.expect(res.body.message).to.equal('');
@@ -77,13 +77,13 @@ describe('skApiTestCases - Place Order Tests', function() {
       });
   });
 
-  it('Invalid Input without orderAt property', function(done) {
+  it('Should get status code 400 for not passing orderAt in payload', done => {
     api
       .post('/v1/orders')
       .set('Accept', 'application/json')
       .send(invalidInputWithoutOrderAt)
       .expect('Content-Type', /json/)
-      .end(function(err, res) {
+      .end((err, res) => {
         chai.expect(res.statusCode).to.equal(400);
         chai.expect(res.body).to.have.property('message');
         chai.expect(res.body.message).to.equal('error in field(s): orderAt');
@@ -91,13 +91,13 @@ describe('skApiTestCases - Place Order Tests', function() {
       });
   });
 
-  it('Invalid Input without stops property', function(done) {
+  it('Should get status code 400 for not passing stops in payload', done => {
     api
       .post('/v1/orders')
       .set('Accept', 'application/json')
       .send(invalidInputWithoutStops)
       .expect('Content-Type', /json/)
-      .end(function(err, res) {
+      .end((err, res) => {
         chai.expect(res.statusCode).to.equal(400);
         chai.expect(res.body).to.have.property('message');
         chai.expect(res.body.message).to.equal('error in field(s): stops');
@@ -105,13 +105,13 @@ describe('skApiTestCases - Place Order Tests', function() {
       });
   });
 
-  it('Valid Input', function(done) {
+  it('Valid Input', done => {
     api
       .post('/v1/orders')
       .set('Accept', 'application/json')
       .send(invalidInput)
       .expect('Content-Type', /json/)
-      .end(function(err, res) {
+      .end((err, res) => {
         console.log(res.body);
         console.log(res.statusCode);
         chai.expect(res.statusCode).to.equal(400);
