@@ -1,0 +1,32 @@
+{
+  "name": "skapitestcases",
+  "version": "1.0.0",
+  "description": "Test cases for API testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/PlaceOrder.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syadav214/skApiTestCases.git"
+  },
+  "keywords": [
+    "nodejs",
+    "js",
+    "mocha",
+    "chai",
+    "testing"
+  ],
+  "author": "Santoshkumar Yadav",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/syadav214/skApiTestCases/issues"
+  },
+  "homepage": "https://github.com/syadav214/skApiTestCases#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "dotenv": "^6.1.0",
+    "mocha": "^5.2.0",
+    "supertest": "^3.3.0"
+  }
+}
