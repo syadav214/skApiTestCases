@@ -1,32 +1,33 @@
 <testsuites name="Mocha Tests">
-  <testsuite name="ApiRunning Tests" tests="1" errors="0" failures="0" skipped="0" timestamp="2018-10-12T11:35:01" time="0.022">
-    <testcase classname="ApiRunning Tests" name="should get response from the endpoint" time="0.018">
+  <testsuite name="ApiRunning Tests" tests="1" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:22" time="0.02">
+    <testcase classname="ApiRunning Tests" name="should get response from the endpoint" time="0.016">
     </testcase>
   </testsuite>
-  <testsuite name="Place Order Tests" tests="4" errors="0" failures="0" skipped="0" timestamp="2018-10-12T11:35:01" time="0.011">
-    <testcase classname="Place Order Tests" name="Should get status code 400 for null payload" time="0.004">
+  <testsuite name="Place Order Tests" tests="4" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:22" time="0.389">
+    <testcase classname="Place Order Tests" name="Should get status code 400 for null payload" time="0.005">
     </testcase>
-    <testcase classname="Place Order Tests" name="Should get status code 400 for not passing orderAt in payload" time="0.002">
+    <testcase classname="Place Order Tests" name="Should get status code 400 for not passing orderAt in payload" time="0.003">
     </testcase>
     <testcase classname="Place Order Tests" name="Should get status code 400 for not passing stops in payload" time="0.002">
     </testcase>
-    <testcase classname="Place Order Tests" name="Valid Input" time="0.003">
-      <system-out><![CDATA[{ message: 'field orderAt is behind the present time' }
-400
+    <testcase classname="Place Order Tests" name="Should calculat correct fare amount from 5.01AM to 8.59PM" time="0.376">
+      <system-out><![CDATA[2018-10-15T18:30:00.000Z { id: 27,
+  drivingDistancesInMeters: [ 10600, 5314 ],
+  fare: { amount: '367.85', currency: 'HKD' } }
 ]]></system-out>
     </testcase>
   </testsuite>
-  <testsuite name="Fetch Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-12T11:35:01" time="0.007">
+  <testsuite name="Fetch Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:23" time="0.009">
     <testcase classname="Fetch Order Tests" name="Should get status code 405 for not passing OrderID" time="0.002">
     </testcase>
-    <testcase classname="Fetch Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.002">
+    <testcase classname="Fetch Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.003">
     </testcase>
-    <testcase classname="Fetch Order Tests" name="Valid Input" time="0.001">
+    <testcase classname="Fetch Order Tests" name="Valid Input" time="0.002">
       <system-out><![CDATA[404
 ]]></system-out>
     </testcase>
   </testsuite>
-  <testsuite name="Take Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-12T11:35:01" time="0.005">
+  <testsuite name="Take Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:23" time="0.006">
     <testcase classname="Take Order Tests" name="Should get status code 301 for not passing OrderID" time="0.001">
     </testcase>
     <testcase classname="Take Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.002">
@@ -37,23 +38,23 @@
 ]]></system-out>
     </testcase>
   </testsuite>
-  <testsuite name="Complete Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-12T11:35:01" time="0.007">
-    <testcase classname="Complete Order Tests" name="Should get status code 301 for not passing OrderID" time="0.002">
+  <testsuite name="Complete Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:23" time="0.01">
+    <testcase classname="Complete Order Tests" name="Should get status code 301 for not passing OrderID" time="0.004">
     </testcase>
-    <testcase classname="Complete Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.002">
+    <testcase classname="Complete Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.003">
     </testcase>
-    <testcase classname="Complete Order Tests" name="Valid Input" time="0.002">
+    <testcase classname="Complete Order Tests" name="Valid Input" time="0.003">
       <system-out><![CDATA[404
 { message: 'ORDER_NOT_FOUND' }
 ]]></system-out>
     </testcase>
   </testsuite>
-  <testsuite name="Cancel Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-12T11:35:01" time="0.005">
-    <testcase classname="Cancel Order Tests" name="Should get status code 301 for not passing OrderID" time="0.001">
+  <testsuite name="Cancel Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:23" time="0.007">
+    <testcase classname="Cancel Order Tests" name="Should get status code 301 for not passing OrderID" time="0.002">
     </testcase>
-    <testcase classname="Cancel Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.002">
+    <testcase classname="Cancel Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.003">
     </testcase>
-    <testcase classname="Cancel Order Tests" name="Valid Input" time="0.002">
+    <testcase classname="Cancel Order Tests" name="Valid Input" time="0.001">
       <system-out><![CDATA[404
 { message: 'ORDER_NOT_FOUND' }
 ]]></system-out>

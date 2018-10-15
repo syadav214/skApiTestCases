@@ -5,8 +5,25 @@ const dotenv = require('dotenv'),
 dotenv.config();
 const api = supertest(process.env.URL);
 
+const currDate = new Date();
+const prevMonth = currDate.getMonth() - 1;
+const oldDate = new Date(currDate.getFullYear(), currDate.getMonth() - 1, 1);
+
+const dayTimeDate = new Date(
+  currDate.getFullYear(),
+  currDate.getMonth(),
+  currDate.getDate(),
+  20
+);
+const nightTimeDate = new Date(
+  currDate.getFullYear(),
+  currDate.getMonth(),
+  currDate.getDate(),
+  30
+);
+
 const invalidInput = {
-  orderAt: '2018-09-03T13:00:00.000Z',
+  orderAt: oldDate,
   stops: [
     {
       lat: 22.344674,
@@ -41,11 +58,10 @@ const invalidInputWithoutOrderAt = {
 };
 
 const invalidInputWithoutStops = {
-  orderAt: '2018-09-03T13:00:00.000Z'
+  orderAt: oldDate
 };
 
 const validInput = {
-  orderAt: '2018-10-13T13:00:00.000Z',
   stops: [
     {
       lat: 22.344674,
@@ -56,11 +72,35 @@ const validInput = {
       lng: 114.182446
     },
     {
-      lat: 22.385669,
-      lng: 114.186962
+      lat: 22.405669,
+      lng: 114.188962
     }
   ]
 };
+
+function calculateAmt(drivingDistancesInMeters, isDay) {
+  let totalDistance = drivingDistancesInMeters.reduce(
+    (prev, cur) => prev + cur
+  );
+
+  let amt = 0,
+    extraAmt = 0;
+
+  // Get base amount and extra amount charged for given timings
+  if (isDay) {
+    amt = parseInt(process.env.BaseAmtDay);
+    extraAmt = parseInt(process.env.ExtraAmtDay);
+  } else {
+    amt = parseInt(process.env.BaseAmtNight);
+    extraAmt = parseInt(process.env.ExtraAmtNight);
+  }
+
+  if (totalDistance > parseInt(process.env.BaseDistance)) {
+    totalDistance -= parseInt(process.env.BaseDistance);
+    amt += (totalDistance * extraAmt) / parseInt(process.env.ExtraCostDistance);
+  }
+  return amt;
+}
 
 describe('Place Order Tests', () => {
   it('Should get status code 400 for null payload', done => {
@@ -105,20 +145,50 @@ describe('Place Order Tests', () => {
       });
   });
 
-  it('Valid Input', done => {
+  it('Should calculate correct fare amount from 5.01AM to 8.59PM', done => {
+    // Setting day time
+    validInput.orderAt = dayTimeDate;
     api
       .post('/v1/orders')
       .set('Accept', 'application/json')
-      .send(invalidInput)
+      .send(validInput)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        console.log(res.body);
-        console.log(res.statusCode);
-        chai.expect(res.statusCode).to.equal(400);
-        chai.expect(res.body).to.have.property('message');
+        chai.expect(res.statusCode).to.equal(201);
+        chai.expect(res.body).to.have.property('id');
+        chai.expect(res.body).to.have.property('drivingDistancesInMeters');
+        chai.expect(res.body).to.have.property('fare');
+        chai.expect(res.body.fare).to.have.property('amount');
+        chai.expect(res.body.fare).to.have.property('currency');
+        // Comparing amount
         chai
-          .expect(res.body.message)
-          .to.equal('field orderAt is behind the present time');
+          .expect(parseFloat(res.body.fare.amount))
+          .to.equal(calculateAmt(res.body.drivingDistancesInMeters, true));
+
+        done();
+      });
+  });
+
+  it('Should calculate correct fare amount from 9.00PM to 5.00AM', done => {
+    // Setting night time
+    validInput.orderAt = nightTimeDate;
+    api
+      .post('/v1/orders')
+      .set('Accept', 'application/json')
+      .send(validInput)
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        chai.expect(res.statusCode).to.equal(201);
+        chai.expect(res.body).to.have.property('id');
+        chai.expect(res.body).to.have.property('drivingDistancesInMeters');
+        chai.expect(res.body).to.have.property('fare');
+        chai.expect(res.body.fare).to.have.property('amount');
+        chai.expect(res.body.fare).to.have.property('currency');
+        // Comparing amount
+        chai
+          .expect(parseFloat(res.body.fare.amount))
+          .to.equal(calculateAmt(res.body.drivingDistancesInMeters, false));
+
         done();
       });
   });
