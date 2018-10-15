@@ -2,11 +2,12 @@
 
 Test cases in NodeJs using Mocha, Chai, Supertest and Mocha-Jenkins Reporter
 
-### Execute below commands to run the test cases locally, after changing OrderID and URL in .env file
+Below are steps to get test results:
 
-```bash
-    $ npm install
-    $ npm run test
-```
-
-Please check test-result/api-result.xml after running above commands.
+* 1. Change URL and OrderID in .env file
+* 2. Execute below commands to run the test cases
+    ```bash
+        $ npm install
+        $ npm run test
+    ```
+* 3. Check test result from test-result/api-result.xml
