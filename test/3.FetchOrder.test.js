@@ -28,15 +28,23 @@ describe('Fetch Order Tests', () => {
       });
   });
 
-  it('Valid Input', done => {
+  it('Should get valid property from the response on passing correct OrderID', done => {
     api
-      .get('/v1/orders/100')
+      .get('/v1/orders/26')
       .send(null)
       .expect('Content-Type', /json/)
       .end((err, res) => {
-        console.log(res.statusCode);
-        //console.log(res.body);
-        //chai.expect(res.statusCode).to.equal(201);
+        chai.expect(res.statusCode).to.equal(200);
+        chai.expect(res.body).to.have.property('id');
+        chai.expect(res.body).to.have.property('stops');
+        chai.expect(res.body).to.have.property('drivingDistancesInMeters');
+        chai.expect(res.body).to.have.property('fare');
+        chai.expect(res.body.fare).to.have.property('amount');
+        chai.expect(res.body.fare).to.have.property('currency');
+        chai.expect(res.body).to.have.property('status');
+        chai.expect(res.body.status).not.equal('');
+        chai.expect(res.body).to.have.property('orderDateTime');
+        chai.expect(res.body).to.have.property('createdTime');
         done();
       });
   });
