@@ -30,7 +30,7 @@ describe('Take Order Tests', () => {
       });
   });
 
-  it('Should get custom message on passing correct OrderID where logic flow is incorrect', done => {
+  it('Should get status code 422 and  custom message on passing correct OrderID where logic flow is incorrect', done => {
     api
       .put('/v1/orders/26/take')
       .send(null)
@@ -53,7 +53,6 @@ describe('Take Order Tests', () => {
         chai.expect(res.body).to.have.property('id');
         chai.expect(res.body).to.have.property('status');
         chai.expect(res.body.status).not.equal('');
-        chai.expect(res.body).to.have.property('ongoingAt');
         done();
       });
   });

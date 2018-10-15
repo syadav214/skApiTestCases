@@ -43,8 +43,6 @@ describe('Fetch Order Tests', () => {
         chai.expect(res.body.fare).to.have.property('currency');
         chai.expect(res.body).to.have.property('status');
         chai.expect(res.body.status).not.equal('');
-        chai.expect(res.body).to.have.property('orderDateTime');
-        chai.expect(res.body).to.have.property('createdTime');
         done();
       });
   });
