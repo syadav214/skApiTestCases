@@ -30,7 +30,7 @@ describe('Take Order Tests', () => {
 
   it('Should get valid properties from the response on passing correct OrderID', done => {
     api
-      .put('/v1/orders/26/take')
+      .put('/v1/orders/' + process.env.OrderID + '/take')
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(200);
@@ -43,7 +43,7 @@ describe('Take Order Tests', () => {
 
   it('Should get status code 422 and custom message on passing correct OrderID where logic flow is incorrect', done => {
     api
-      .put('/v1/orders/26/take')
+      .put('/v1/orders/' + process.env.OrderID + '/take')
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(422);

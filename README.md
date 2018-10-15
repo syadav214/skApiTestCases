@@ -2,7 +2,7 @@
 
 Test cases in NodeJs using Mocha, Chai, Supertest and Mocha-Jenkins Reporter
 
-### Execute below commands to run the test cases locally
+### Execute below commands to run the test cases locally, after changing OrderID and URL in .env file
 
 ```bash
     $ npm install
