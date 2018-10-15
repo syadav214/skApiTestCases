@@ -30,29 +30,27 @@ describe('Complete Order Tests', () => {
       });
   });
 
-  it('Should get status code 422 and custom message on passing correct OrderID where logic flow is incorrect', done => {
-    api
-      .put('/v1/orders/1/complete')
-      .send(null)
-      .expect('Content-Type', /json/)
-      .end((err, res) => {
-        chai.expect(res.statusCode).to.equal(422);
-        chai.expect(res.body).to.have.property('message');
-        chai.expect(res.body.message).not.equal('');
-        done();
-      });
-  });
-
   it('Should get valid properties from the response on passing correct OrderID', done => {
     api
       .put('/v1/orders/26/complete')
-      .send(null)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(200);
         chai.expect(res.body).to.have.property('id');
         chai.expect(res.body).to.have.property('status');
         chai.expect(res.body.status).not.equal('');
+        done();
+      });
+  });
+
+  it('Should get status code 422 and custom message on passing correct OrderID where logic flow is incorrect', done => {
+    api
+      .put('/v1/orders/26/complete')
+      .expect('Content-Type', /json/)
+      .end((err, res) => {
+        chai.expect(res.statusCode).to.equal(422);
+        chai.expect(res.body).to.have.property('message');
+        chai.expect(res.body.message).not.equal('');
         done();
       });
   });

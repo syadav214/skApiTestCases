@@ -1,63 +1,95 @@
 <testsuites name="Mocha Tests">
-  <testsuite name="ApiRunning Tests" tests="1" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:22" time="0.02">
-    <testcase classname="ApiRunning Tests" name="should get response from the endpoint" time="0.016">
+  <testsuite name="ApiRunning Tests" tests="1" errors="0" failures="0" skipped="0" timestamp="2018-10-15T11:32:29" time="0.024">
+    <testcase classname="ApiRunning Tests" name="should get response from the endpoint" time="0.02">
     </testcase>
   </testsuite>
-  <testsuite name="Place Order Tests" tests="4" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:22" time="0.389">
-    <testcase classname="Place Order Tests" name="Should get status code 400 for null payload" time="0.005">
+  <testsuite name="Place Order Tests" tests="5" errors="0" failures="0" skipped="0" timestamp="2018-10-15T11:32:29" time="0.478">
+    <testcase classname="Place Order Tests" name="Should get status code 400 for null payload" time="0.003">
     </testcase>
     <testcase classname="Place Order Tests" name="Should get status code 400 for not passing orderAt in payload" time="0.003">
     </testcase>
     <testcase classname="Place Order Tests" name="Should get status code 400 for not passing stops in payload" time="0.002">
     </testcase>
-    <testcase classname="Place Order Tests" name="Should calculat correct fare amount from 5.01AM to 8.59PM" time="0.376">
-      <system-out><![CDATA[2018-10-15T18:30:00.000Z { id: 27,
-  drivingDistancesInMeters: [ 10600, 5314 ],
-  fare: { amount: '367.85', currency: 'HKD' } }
-]]></system-out>
+    <testcase classname="Place Order Tests" name="Should calculate correct fare amount from 5.01AM to 8.59PM" time="0.377">
+    </testcase>
+    <testcase classname="Place Order Tests" name="Should calculate correct fare amount from 9.00PM to 5.00AM" time="0.09">
     </testcase>
   </testsuite>
-  <testsuite name="Fetch Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:23" time="0.009">
-    <testcase classname="Fetch Order Tests" name="Should get status code 405 for not passing OrderID" time="0.002">
+  <testsuite name="Fetch Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-15T11:32:29" time="0.01">
+    <testcase classname="Fetch Order Tests" name="Should get status code 405 for not passing OrderID" time="0.003">
     </testcase>
-    <testcase classname="Fetch Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.003">
+    <testcase classname="Fetch Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.002">
     </testcase>
-    <testcase classname="Fetch Order Tests" name="Valid Input" time="0.002">
-      <system-out><![CDATA[404
-]]></system-out>
+    <testcase classname="Fetch Order Tests" name="Should get valid properties from the response on passing correct OrderID" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="Take Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:23" time="0.006">
-    <testcase classname="Take Order Tests" name="Should get status code 301 for not passing OrderID" time="0.001">
+  <testsuite name="Take Order Tests" tests="4" errors="0" failures="1" skipped="0" timestamp="2018-10-15T11:32:29" time="0.013">
+    <testcase classname="Take Order Tests" name="Should get status code 301 for not passing OrderID" time="0.003">
     </testcase>
     <testcase classname="Take Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.002">
     </testcase>
-    <testcase classname="Take Order Tests" name="Valid Input" time="0.002">
-      <system-out><![CDATA[404
-{ message: 'ORDER_NOT_FOUND' }
-]]></system-out>
+    <testcase classname="Take Order Tests" name="Should get valid properties from the response on passing correct OrderID" time="0">
+      <failure message="expected 422 to equal 200">+200
+-422
+
+    at Test.api.put.expect.end (test/4.TakeOrder.test.js:38:40)
+    at Test.assert (node_modules/supertest/lib/test.js:181:6)
+    at localAssert (node_modules/supertest/lib/test.js:131:12)
+    at /home/localadmin/Documents/Testing/skApiTestCases/node_modules/supertest/lib/test.js:128:5
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:728:3)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1064:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)</failure>
+    </testcase>
+    <testcase classname="Take Order Tests" name="Should get status code 422 and custom message on passing correct OrderID where logic flow is incorrect" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="Complete Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:23" time="0.01">
-    <testcase classname="Complete Order Tests" name="Should get status code 301 for not passing OrderID" time="0.004">
+  <testsuite name="Complete Order Tests" tests="4" errors="0" failures="1" skipped="0" timestamp="2018-10-15T11:32:29" time="0.007">
+    <testcase classname="Complete Order Tests" name="Should get status code 301 for not passing OrderID" time="0.001">
     </testcase>
-    <testcase classname="Complete Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.003">
+    <testcase classname="Complete Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.002">
     </testcase>
-    <testcase classname="Complete Order Tests" name="Valid Input" time="0.003">
-      <system-out><![CDATA[404
-{ message: 'ORDER_NOT_FOUND' }
-]]></system-out>
+    <testcase classname="Complete Order Tests" name="Should get valid properties from the response on passing correct OrderID" time="0">
+      <failure message="expected 422 to equal 200">+200
+-422
+
+    at Test.api.put.expect.end (test/5.CompleteOrder.test.js:38:40)
+    at Test.assert (node_modules/supertest/lib/test.js:181:6)
+    at localAssert (node_modules/supertest/lib/test.js:131:12)
+    at /home/localadmin/Documents/Testing/skApiTestCases/node_modules/supertest/lib/test.js:128:5
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:728:3)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1064:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)</failure>
+    </testcase>
+    <testcase classname="Complete Order Tests" name="Should get status code 422 and custom message on passing correct OrderID where logic flow is incorrect" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="Cancel Order Tests" tests="3" errors="0" failures="0" skipped="0" timestamp="2018-10-15T09:47:23" time="0.007">
-    <testcase classname="Cancel Order Tests" name="Should get status code 301 for not passing OrderID" time="0.002">
+  <testsuite name="Cancel Order Tests" tests="4" errors="0" failures="1" skipped="0" timestamp="2018-10-15T11:32:29" time="0.008">
+    <testcase classname="Cancel Order Tests" name="Should get status code 301 for not passing OrderID" time="0.001">
     </testcase>
-    <testcase classname="Cancel Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.003">
+    <testcase classname="Cancel Order Tests" name="Should get status code 404 for passing incorrect OrderID" time="0.001">
     </testcase>
-    <testcase classname="Cancel Order Tests" name="Valid Input" time="0.001">
-      <system-out><![CDATA[404
-{ message: 'ORDER_NOT_FOUND' }
-]]></system-out>
+    <testcase classname="Cancel Order Tests" name="Should get valid properties from the response on passing correct OrderID" time="0">
+      <failure message="expected 422 to equal 200">+200
+-422
+
+    at Test.api.put.send.expect.end (test/6.CancelOrder.test.js:39:40)
+    at Test.assert (node_modules/supertest/lib/test.js:181:6)
+    at localAssert (node_modules/supertest/lib/test.js:131:12)
+    at /home/localadmin/Documents/Testing/skApiTestCases/node_modules/supertest/lib/test.js:128:5
+    at Test.Request.callback (node_modules/superagent/lib/node/index.js:728:3)
+    at parser (node_modules/superagent/lib/node/index.js:916:18)
+    at IncomingMessage.res.on (node_modules/superagent/lib/node/parsers/json.js:19:7)
+    at endReadableNT (_stream_readable.js:1064:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)</failure>
+    </testcase>
+    <testcase classname="Cancel Order Tests" name="Should get status code 422 and custom message on passing correct OrderID where logic flow is incorrect" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>
