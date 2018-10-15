@@ -28,7 +28,7 @@ describe('Fetch Order Tests', () => {
       });
   });
 
-  it('Should get valid property from the response on passing correct OrderID', done => {
+  it('Should get valid properties from the response on passing correct OrderID', done => {
     api
       .get('/v1/orders/26')
       .send(null)
