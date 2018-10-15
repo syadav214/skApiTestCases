@@ -9,7 +9,6 @@ describe('Cancel Order Tests', () => {
   it('Should get status code 301 for not passing OrderID', done => {
     api
       .put('/v1/orders//cancel')
-      .send(null)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(301);
@@ -20,7 +19,6 @@ describe('Cancel Order Tests', () => {
   it('Should get status code 404 for passing incorrect OrderID', done => {
     api
       .put('/v1/orders/0/cancel')
-      .send(null)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(404);
@@ -33,7 +31,6 @@ describe('Cancel Order Tests', () => {
   it('Should get valid properties from the response on passing correct OrderID', done => {
     api
       .put('/v1/orders/26/cancel')
-      .send(null)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(200);
@@ -47,7 +44,6 @@ describe('Cancel Order Tests', () => {
   it('Should get status code 422 and custom message on passing correct OrderID where logic flow is incorrect', done => {
     api
       .put('/v1/orders/26/cancel')
-      .send(null)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(422);

@@ -9,7 +9,6 @@ describe('Complete Order Tests', () => {
   it('Should get status code 301 for not passing OrderID', done => {
     api
       .put('/v1/orders//complete')
-      .send(null)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(301);
@@ -20,7 +19,6 @@ describe('Complete Order Tests', () => {
   it('Should get status code 404 for passing incorrect OrderID', done => {
     api
       .put('/v1/orders/0/complete')
-      .send(null)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(404);
