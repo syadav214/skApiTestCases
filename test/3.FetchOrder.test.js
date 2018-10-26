@@ -30,7 +30,7 @@ describe('Fetch Order Tests', () => {
 
   it('Should get valid properties from the response on passing correct OrderID', done => {
     api
-      .get('/v1/orders/' + process.env.OrderID)
+      .get('/v1/orders/' + global.OrderID)
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(200);

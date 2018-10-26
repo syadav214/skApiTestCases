@@ -155,6 +155,7 @@ describe('Place Order Tests', () => {
       .expect('Content-Type', /json/)
       .end((err, res) => {
         chai.expect(res.statusCode).to.equal(201);
+        global.OrderID = res.body.id;
         chai.expect(res.body).to.have.property('id');
         chai.expect(res.body).to.have.property('drivingDistancesInMeters');
         chai.expect(res.body).to.have.property('fare');
